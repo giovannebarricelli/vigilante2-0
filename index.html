@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Vigilante | Inteligência de Perfis & Varredura Criptografada</title>
     
-    <!-- Preconnect para acelerar carregamento de fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- CSS Crítico com transição fluida por opacidade (Zero Tela Preta) -->
     <style>
         :root {
             --bg-deep: #07090e;
@@ -113,6 +111,7 @@
         .header h1 span { color: #f87171; }
         .header p { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
 
+        /* Card container com altura fixa mínima para evitar qualquer reflow de tela */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -120,30 +119,28 @@
             padding: 20px;
             box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
             position: relative;
-            transform: translateZ(0);
-            min-height: 380px; /* Mantém altura estável para evitar layout shift */
+            min-height: 420px;
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
         }
 
-        /* Sistema de exibição por camadas empilhadas (Elimina delay e tela preta) */
+        /* Camadas isoladas em GPU para troca 100% instantânea sem delay */
         .step-content {
             position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
+            inset: 20px;
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transition: opacity 0.15s ease-in-out;
+            will-change: opacity;
+            transform: translate3d(0, 0, 0);
         }
 
         .step-content.active {
-            position: relative;
-            top: 0;
-            left: 0;
-            right: 0;
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
+            position: relative;
+            inset: auto;
         }
 
         .step-header {
@@ -448,39 +445,39 @@
                 </div>
                 
                 <div class="options-grid">
-                    <div class="option-card" ontouchend="selectMethod('phone'); event.preventDefault();" onclick="selectMethod('phone')">
+                    <div class="option-card" onclick="selectMethod('phone')">
                         <span class="option-icon">📱</span>
                         <div class="option-info"><h3>Telefone</h3></div>
                     </div>
-                    <div class="option-card" ontouchend="selectMethod('email'); event.preventDefault();" onclick="selectMethod('email')">
+                    <div class="option-card" onclick="selectMethod('email')">
                         <span class="option-icon">📧</span>
                         <div class="option-info"><h3>E-mail</h3></div>
                     </div>
-                    <div class="option-card" ontouchend="selectMethod('name'); event.preventDefault();" onclick="selectMethod('name')">
+                    <div class="option-card" onclick="selectMethod('name')">
                         <span class="option-icon">👤</span>
                         <div class="option-info"><h3>Nome</h3></div>
                     </div>
-                    <div class="option-card" ontouchend="selectMethod('whatsapp'); event.preventDefault();" onclick="selectMethod('whatsapp')">
+                    <div class="option-card" onclick="selectMethod('whatsapp')">
                         <span class="option-icon">💬</span>
                         <div class="option-info"><h3>WhatsApp</h3></div>
                     </div>
-                    <div class="option-card" ontouchend="selectMethod('instagram'); event.preventDefault();" onclick="selectMethod('instagram')">
+                    <div class="option-card" onclick="selectMethod('instagram')">
                         <span class="option-icon">📸</span>
                         <div class="option-info"><h3>Instagram</h3></div>
                     </div>
-                    <div class="option-card" ontouchend="selectMethod('username'); event.preventDefault();" onclick="selectMethod('username')">
+                    <div class="option-card" onclick="selectMethod('username')">
                         <span class="option-icon">🏷️</span>
                         <div class="option-info"><h3>Username</h3></div>
                     </div>
-                    <div class="option-card" ontouchend="selectMethod('dating_app'); event.preventDefault();" onclick="selectMethod('dating_app')">
+                    <div class="option-card" onclick="selectMethod('dating_app')">
                         <span class="option-icon">🔥</span>
                         <div class="option-info"><h3>App Relacionamento</h3></div>
                     </div>
-                    <div class="option-card" ontouchend="selectMethod('dating_site'); event.preventDefault();" onclick="selectMethod('dating_site')">
+                    <div class="option-card" onclick="selectMethod('dating_site')">
                         <span class="option-icon">🌐</span>
                         <div class="option-info"><h3>Site Relacionamento</h3></div>
                     </div>
-                    <div class="option-card" ontouchend="selectMethod('adult_site'); event.preventDefault();" onclick="selectMethod('adult_site')">
+                    <div class="option-card" onclick="selectMethod('adult_site')">
                         <span class="option-icon">🔞</span>
                         <div class="option-info"><h3>Plataforma Adulta</h3></div>
                     </div>
@@ -572,39 +569,37 @@
         ];
         let foundPlatformsCount = 0;
 
+        // Pré-carrega dados instantâneos ao carregar a página para o navegador cachear na memória
+        const configData = {
+            phone: { title: 'Pesquisar por Telefone', label: 'Número de Celular', emoji: '📱', placeholder: '(00) 00000-0000' },
+            email: { title: 'Pesquisar por E-mail', label: 'Endereço de E-mail', emoji: '📧', placeholder: 'exemplo@dominio.com' },
+            name: { title: 'Pesquisar por Nome Completo', label: 'Nome Completo do Alvo', emoji: '👤', placeholder: 'Ex: Nome Sobrenome' },
+            whatsapp: { title: 'Pesquisar por WhatsApp', label: 'Número do WhatsApp', emoji: '💬', placeholder: '(00) 00000-0000' },
+            instagram: { title: 'Pesquisar por Instagram', label: 'Perfil do Instagram', emoji: '📸', placeholder: '@usuario' },
+            username: { title: 'Pesquisar por Username', label: 'Nome de Usuário (Apelido)', emoji: '🏷️', placeholder: 'usuario123' },
+            dating_app: { title: 'Pesquisar em Apps de Relacionamento', label: 'Dado para busca em Apps', emoji: '🔥', placeholder: 'Telefone, e-mail ou nome' },
+            dating_site: { title: 'Pesquisar em Sites de Relacionamento', label: 'Dado para busca em Sites', emoji: '🌐', placeholder: 'E-mail ou username' },
+            adult_site: { title: 'Pesquisar em Plataformas Adultas', label: 'Dado para busca em Plataformas', emoji: '🔞', placeholder: 'E-mail, username ou nome' }
+        };
+
         function selectMethod(type) {
             selectedMethodType = type;
-            const inputField = document.getElementById('target-input');
-            const inputLabel = document.getElementById('input-label');
-            const inputEmoji = document.getElementById('input-emoji');
-            const inputTitle = document.getElementById('input-title');
-            inputField.value = '';
-
-            const config = {
-                phone: { title: 'Pesquisar por Telefone', label: 'Número de Celular', emoji: '📱', placeholder: '(00) 00000-0000' },
-                email: { title: 'Pesquisar por E-mail', label: 'Endereço de E-mail', emoji: '📧', placeholder: 'exemplo@dominio.com' },
-                name: { title: 'Pesquisar por Nome Completo', label: 'Nome Completo do Alvo', emoji: '👤', placeholder: 'Ex: Nome Sobrenome' },
-                whatsapp: { title: 'Pesquisar por WhatsApp', label: 'Número do WhatsApp', emoji: '💬', placeholder: '(00) 00000-0000' },
-                instagram: { title: 'Pesquisar por Instagram', label: 'Perfil do Instagram', emoji: '📸', placeholder: '@usuario' },
-                username: { title: 'Pesquisar por Username', label: 'Nome de Usuário (Apelido)', emoji: '🏷️', placeholder: 'usuario123' },
-                dating_app: { title: 'Pesquisar em Apps de Relacionamento', label: 'Dado para busca em Apps', emoji: '🔥', placeholder: 'Telefone, e-mail ou nome' },
-                dating_site: { title: 'Pesquisar em Sites de Relacionamento', label: 'Dado para busca em Sites', emoji: '🌐', placeholder: 'E-mail ou username' },
-                adult_site: { title: 'Pesquisar em Plataformas Adultas', label: 'Dado para busca em Plataformas', emoji: '🔞', placeholder: 'E-mail, username ou nome' }
-            };
-
-            if (config[type]) {
-                inputTitle.textContent = config[type].title;
-                inputLabel.textContent = config[type].label;
-                inputEmoji.textContent = config[type].emoji;
-                inputField.placeholder = config[type].placeholder;
+            const cfg = configData[type];
+            if (cfg) {
+                document.getElementById('input-title').textContent = cfg.title;
+                document.getElementById('input-label').textContent = cfg.label;
+                document.getElementById('input-emoji').textContent = cfg.emoji;
+                document.getElementById('target-input').placeholder = cfg.placeholder;
             }
+            document.getElementById('target-input').value = '';
 
-            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+            // Troca imediata de camadas na pilha GPU
+            document.getElementById('step-1').classList.remove('active');
             document.getElementById('step-input').classList.add('active');
         }
 
         function backToOptions() {
-            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+            document.getElementById('step-input').classList.remove('active');
             document.getElementById('step-1').classList.add('active');
         }
 
@@ -615,7 +610,7 @@
                 return;
             }
 
-            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+            document.getElementById('step-input').classList.remove('active');
             document.getElementById('step-2').classList.add('active');
 
             const loadingText = document.getElementById('loading-text');
@@ -645,7 +640,6 @@
             });
 
             const activeTimeMs = 800;
-            const transitionTimeMs = 200;
             const totalSteps = mainPlatformsList.length;
             let currentIndex = 0;
 
@@ -677,7 +671,7 @@
                     progressText.textContent = `${currentPercent}%`;
 
                     currentIndex++;
-                    setTimeout(() => setTimeout(runMainScanStep, transitionTimeMs), activeTimeMs);
+                    setTimeout(runMainScanStep, activeTimeMs);
                 } else {
                     startMassScanPhase();
                 }
@@ -725,9 +719,9 @@
 
                     setTimeout(() => {
                         populateResultsPage();
-                        document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+                        document.getElementById('step-2').classList.remove('active');
                         document.getElementById('step-3').classList.add('active');
-                    }, 800);
+                    }, 500);
                 }
             }, intervalTimeMs);
         }
