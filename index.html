@@ -10,11 +10,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- CSS Crítico Otimizado para Mobile Instantâneo -->
+    <!-- CSS Crítico com transição fluida por opacidade (Zero Tela Preta) -->
     <style>
         :root {
             --bg-deep: #07090e;
-            --card-bg: rgba(15, 23, 42, 0.95);
+            --card-bg: rgba(15, 23, 42, 0.98);
             --border-color: rgba(255, 255, 255, 0.08);
             --primary-red: #dc2626;
             --text-main: #f9fafb;
@@ -120,14 +120,31 @@
             padding: 20px;
             box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
             position: relative;
-            transform: translateZ(0); /* Aceleração de hardware GPU */
+            transform: translateZ(0);
+            min-height: 380px; /* Mantém altura estável para evitar layout shift */
         }
 
+        /* Sistema de exibição por camadas empilhadas (Elimina delay e tela preta) */
         .step-content {
-            display: none;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.15s ease-in-out;
         }
 
-        .step-content.active { display: block; }
+        .step-content.active {
+            position: relative;
+            top: 0;
+            left: 0;
+            right: 0;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
 
         .step-header {
             display: flex;
@@ -172,7 +189,6 @@
             -webkit-user-select: none;
         }
 
-        /* Feedback visual imediato ao toque no mobile */
         .option-card:active {
             background: rgba(220, 38, 38, 0.15);
             border-color: rgba(220, 38, 38, 0.5);
@@ -219,7 +235,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             color: #fff;
-            font-size: 16px; /* Evita zoom automático no iOS */
+            font-size: 16px;
             outline: none;
         }
 
