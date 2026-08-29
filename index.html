@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -7,7 +8,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -58,7 +59,7 @@
             height: 100%;
             max-height: 100vh;
             max-height: 100dvh;
-            padding: max(8px, env(safe-area-inset-top)) 10px max(8px, env(safe-area-inset-bottom)) 10px;
+            padding: max(6px, env(safe-area-inset-top)) 10px max(6px, env(safe-area-inset-bottom)) 10px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -69,7 +70,7 @@
         .header {
             text-align: center;
             flex-shrink: 0;
-            padding: 2px 0 4px 0;
+            padding: 1px 0 2px 0;
         }
 
         .brand-container {
@@ -100,25 +101,26 @@
             color: var(--primary-green);
         }
 
-        .brand-subtitle {
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--terminal-dim);
-            font-size: 8px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
         .header h1 {
-            font-size: 11px;
+            font-size: 15px;
             color: #ffffff;
-            font-weight: 700;
+            font-weight: 900;
             line-height: 1.15;
-            margin-bottom: 1px;
+            margin-bottom: 2px;
+            letter-spacing: -0.3px;
         }
 
-        .header h1 span { color: var(--primary-red); text-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
-        .header p { font-size: 9px; color: #94a3b8; line-height: 1.15; }
+        .header h1 span { 
+            color: var(--primary-red); 
+            text-shadow: 0 0 12px rgba(239, 68, 68, 0.6); 
+            display: inline-block;
+        }
+
+        .header p { 
+            font-size: 9px; 
+            color: #94a3b8; 
+            line-height: 1.15; 
+        }
 
         .card {
             background: var(--card-bg);
@@ -132,7 +134,7 @@
             flex-direction: column;
             justify-content: stretch;
             overflow: hidden;
-            margin: 4px 0;
+            margin: 3px 0;
         }
 
         .step-content {
@@ -183,7 +185,7 @@
             border-radius: 3px;
         }
 
-        .step-header h2 { font-size: 11.5px; font-weight: 600; color: #e2e8f0; }
+        .step-header h2 { font-size: 11px; font-weight: 600; color: #e2e8f0; }
         
         .node-tag {
             font-family: 'JetBrains Mono', monospace;
@@ -196,19 +198,19 @@
 
         .options-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             grid-template-rows: repeat(3, 1fr);
-            gap: 5px;
+            gap: 8px;
             flex: 1;
             width: 100%;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .option-card {
-            background: rgba(255, 255, 255, 0.015);
-            border: 1px solid rgba(34, 197, 94, 0.12);
-            border-radius: 6px;
-            padding: 2px;
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(4, 47, 46, 0.5));
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 6px;
             cursor: pointer;
             display: flex;
             flex-direction: column;
@@ -217,57 +219,75 @@
             justify-content: center;
             width: 100%;
             height: 100%;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 6px 16px rgba(0, 0, 0, 0.5);
         }
 
         .option-card:active {
-            background: rgba(34, 197, 94, 0.2);
+            background: linear-gradient(145deg, rgba(21, 128, 61, 0.4), rgba(6, 78, 59, 0.8));
             border-color: var(--primary-green);
-            transform: scale(0.96);
+            transform: scale(0.95);
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
         }
 
         .option-icon {
-            font-size: 15px;
-            background: rgba(34, 197, 94, 0.06);
-            width: 24px;
-            height: 24px;
-            border-radius: 5px;
+            font-size: 20px;
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.25) 0%, rgba(2, 6, 23, 0.9) 100%);
+            border: 1.5px solid rgba(34, 197, 94, 0.5);
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+            filter: drop-shadow(0 2px 4px rgba(34, 197, 94, 0.3));
         }
 
         .option-info h3 {
-            font-size: 8px;
-            font-weight: 600;
-            color: #e2e8f0;
-            line-height: 1;
+            font-size: 11.5px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.1;
+            letter-spacing: -0.1px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
         }
 
         .input-screen-body {
-            flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            gap: 8px;
+            gap: 10px;
+            margin-top: 4px;
         }
 
-        .instruction-box {
-            background: rgba(34, 197, 94, 0.06);
-            border: 1px solid rgba(34, 197, 94, 0.2);
-            padding: 8px 10px;
+        .instruction-box-top {
+            background: rgba(34, 197, 94, 0.04);
+            border: 1px solid rgba(34, 197, 94, 0.35);
             border-radius: 6px;
-            margin-bottom: 4px;
+            padding: 8px 10px;
+            margin-bottom: 2px;
+            box-shadow: 0 0 12px rgba(34, 197, 94, 0.12), inset 0 0 6px rgba(34, 197, 94, 0.06);
         }
 
-        .instruction-box p {
-            font-size: 10px;
-            color: var(--text-muted);
-            line-height: 1.3;
+        .instruction-box-top p {
+            font-size: 9.5px;
+            color: #4ade80;
+            line-height: 1.35;
             font-family: 'JetBrains Mono', monospace;
+            letter-spacing: -0.2px;
+            text-shadow: 0 0 8px rgba(74, 222, 128, 0.4);
+            font-weight: 500;
         }
 
-        .input-group label { display: block; font-size: 9.5px; color: var(--text-muted); margin-bottom: 3px; font-weight: 500; font-family: 'JetBrains Mono', monospace; }
+        .input-group label { 
+            display: block; 
+            font-size: 9.5px; 
+            color: var(--text-muted); 
+            margin-bottom: 3px; 
+            font-weight: 500; 
+            font-family: 'JetBrains Mono', monospace; 
+        }
         
         .input-wrapper {
             position: relative;
@@ -292,6 +312,14 @@
         .input-group input:focus {
             border-color: var(--primary-green);
             box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+        }
+
+        .input-actions-container {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: auto;
+            padding-bottom: 4px;
         }
 
         .btn-primary {
@@ -319,7 +347,7 @@
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.12);
             color: #94a3b8;
-            margin-top: 4px;
+            margin-top: 0;
             box-shadow: none;
         }
 
@@ -379,7 +407,6 @@
 
         .log-time { color: #64748b; flex-shrink: 0; }
         .log-status-ok { color: #4ade80; font-weight: bold; }
-        .log-status-alert { color: #f87171; font-weight: bold; text-shadow: 0 0 5px rgba(248, 113, 113, 0.4); }
 
         .progress-meta {
             display: flex;
@@ -412,21 +439,21 @@
 
         .alert-box {
             background: rgba(239, 68, 68, 0.08);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            padding: 4px 7px;
+            border: 1px solid rgba(239, 68, 68, 0.35);
+            padding: 6px 8px;
             border-radius: 5px;
             display: flex;
-            gap: 5px;
+            gap: 6px;
             margin-bottom: 3px;
             align-items: center;
             flex-shrink: 0;
+            box-shadow: 0 0 12px rgba(239, 68, 68, 0.15);
         }
 
-        .alert-icon { font-size: 11px; }
-        .alert-box h3 { font-size: 9px; color: #fca5a5; line-height: 1.1; font-weight: 600; }
-        .alert-box p { font-size: 8px; color: #94a3b8; }
+        .alert-icon { font-size: 12px; }
+        .alert-box h3 { font-size: 9px; color: #fca5a5; line-height: 1.15; font-weight: 700; }
+        .alert-box h3 strong { color: var(--primary-red); }
 
-        /* Contêiner de resultados expansível ocupando todo o espaço disponível sem limite fixo de altura */
         .results-preview {
             list-style: none;
             margin-bottom: 4px;
@@ -496,25 +523,100 @@
         }
 
         .checkout-box { border-top: 1px solid rgba(34, 197, 94, 0.15); padding-top: 4px; flex-shrink: 0; }
+        .guarantee { text-align: center; font-size: 7.5px; color: #64748b; margin-top: 2px; line-height: 1; }
+        .footer { text-align: center; flex-shrink: 0; font-size: 8px; color: #475569; font-family: 'JetBrains Mono', monospace; padding-top: 2px; }
 
-        .price-container {
+        /* Modal Popup */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.85);
+            backdrop-filter: blur(4px);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            padding: 15px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-card {
+            background: #060b14;
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            border-radius: 12px;
+            padding: 16px;
+            width: 100%;
+            max-width: 360px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.9), 0 0 20px rgba(34, 197, 94, 0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(2, 6, 23, 0.7);
-            padding: 4px 7px;
-            border-radius: 5px;
-            margin-bottom: 4px;
-            border: 1px solid rgba(34, 197, 94, 0.15);
+            border-bottom: 1px solid rgba(34, 197, 94, 0.2);
+            padding-bottom: 8px;
         }
 
-        .old-price { font-size: 9px; color: #64748b; text-decoration: line-through; font-family: 'JetBrains Mono', monospace; }
-        .price-row { text-align: right; }
-        .price-label { display: block; font-size: 7.5px; color: #94a3b8; }
-        .new-price { font-size: 12px; font-weight: 700; color: var(--primary-green); font-family: 'JetBrains Mono', monospace; }
+        .modal-header h3 {
+            font-size: 12px;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+        }
 
-        .guarantee { text-align: center; font-size: 7.5px; color: #64748b; margin-top: 2px; line-height: 1; }
-        .footer { text-align: center; flex-shrink: 0; font-size: 8px; color: #475569; font-family: 'JetBrains Mono', monospace; padding-top: 2px; }
+        .modal-close {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .modal-field {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .modal-field label {
+            font-size: 9px;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .modal-field input {
+            width: 100%;
+            padding: 9px;
+            background: rgba(2, 6, 23, 0.9);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 6px;
+            color: #fff;
+            font-size: 11.5px;
+            outline: none;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .modal-field input:focus {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 8px rgba(34, 197, 94, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -528,111 +630,112 @@
                     <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
                     <span class="brand-name">VIGILANTE OSINT</span>
                 </div>
-                <span class="brand-subtitle">[SHERLOCK_CORE v4.8]</span>
             </div>
-            <h1>Seu parceiro está escondendo de você? Descubra agora <span>todas as contas secretas em apps e sites de relacionamento!</span></h1>
-            <p>Selecione o vetor de rastreio para iniciar a varredura algorítmica.</p>
+            <h1>Está desconfiada(o)? Descubra agora se ele(a) esconde <span>perfis e segredos na internet!</span></h1>
+            <p></p>
         </header>
 
         <main class="card">
-            <!-- STEP 1: Grid de Seleção -->
+            <!-- STEP 1: Grade de Seleção -->
             <div id="step-1" class="step-content active">
                 <div class="step-header">
                     <div class="step-info-left">
                         <span class="step-number">01</span>
-                        <h2>Vetor de Rastreio</h2>
+                        <h2>Selecione uma forma de busca</h2>
                     </div>
                     <span class="node-tag">NODE://IDLE</span>
                 </div>
                 
                 <div class="options-grid">
                     <div class="option-card" onclick="selectMethod('phone')">
-                        <span class="option-icon">📱</span>
+                        <div class="option-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                        </div>
                         <div class="option-info"><h3>Telefone</h3></div>
                     </div>
                     <div class="option-card" onclick="selectMethod('email')">
-                        <span class="option-icon">📧</span>
+                        <div class="option-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </div>
                         <div class="option-info"><h3>E-mail</h3></div>
                     </div>
                     <div class="option-card" onclick="selectMethod('name')">
-                        <span class="option-icon">👤</span>
+                        <div class="option-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        </div>
                         <div class="option-info"><h3>Nome</h3></div>
                     </div>
                     <div class="option-card" onclick="selectMethod('whatsapp')">
-                        <span class="option-icon">💬</span>
+                        <div class="option-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        </div>
                         <div class="option-info"><h3>WhatsApp</h3></div>
                     </div>
                     <div class="option-card" onclick="selectMethod('instagram')">
-                        <span class="option-icon">📸</span>
+                        <div class="option-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        </div>
                         <div class="option-info"><h3>Instagram</h3></div>
                     </div>
                     <div class="option-card" onclick="selectMethod('username')">
-                        <span class="option-icon">🏷️</span>
+                        <div class="option-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        </div>
                         <div class="option-info"><h3>Username</h3></div>
-                    </div>
-                    <div class="option-card" onclick="selectMethod('dating_app')">
-                        <span class="option-icon">🔥</span>
-                        <div class="option-info"><h3>App Relac.</h3></div>
-                    </div>
-                    <div class="option-card" onclick="selectMethod('dating_site')">
-                        <span class="option-icon">🌐</span>
-                        <div class="option-info"><h3>Site Relac.</h3></div>
-                    </div>
-                    <div class="option-card" onclick="selectMethod('adult_site')">
-                        <span class="option-icon">🔞</span>
-                        <div class="option-info"><h3>Plat. Adulta</h3></div>
                     </div>
                 </div>
             </div>
 
-            <!-- STEP INPUT com Instrução Específica -->
+            <!-- STEP INPUT com Instrução Neon no topo -->
             <div id="step-input" class="step-content">
-                <div class="step-header">
-                    <div class="step-info-left">
-                        <span class="step-number">01</span>
-                        <h2 id="input-title">Parâmetro de Alvo</h2>
+                <div>
+                    <div class="step-header">
+                        <div class="step-info-left">
+                            <span class="step-number">01</span>
+                            <h2 id="input-title">Parâmetro de Alvo</h2>
+                        </div>
+                        <span class="node-tag">NODE://INPUT</span>
                     </div>
-                    <span class="node-tag">NODE://INPUT</span>
-                </div>
-                
-                <div class="input-screen-body">
-                    <div class="instruction-box">
-                        <p id="instruction-text">Preencha com o número do seu parceiro para descobrir onde ele tem conta registrada.</p>
-                    </div>
+                    
+                    <div class="input-screen-body">
+                        <div class="instruction-box-top">
+                            <p id="instruction-text">Preencha com o dado do alvo para rastrear registros confidenciais e contas ocultas.</p>
+                        </div>
 
-                    <div class="input-group">
-                        <label id="input-label" for="target-input">VALOR_ALVO</label>
-                        <div class="input-wrapper">
-                            <span class="input-icon" id="input-emoji">🔍</span>
-                            <input type="text" id="target-input" placeholder="">
+                        <div class="input-group">
+                            <label id="input-label" for="target-input">VALOR_ALVO</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon" id="input-emoji">🔍</span>
+                                <input type="text" id="target-input" placeholder="">
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div>
+                <div class="input-actions-container">
                     <button class="btn-primary" onclick="startScan()">
-                        <span>> EXECUTAR SHERLOCK_SCAN()</span>
+                        <span>> EXECUTAR VARREDURA_SCAN()</span>
                     </button>
 
                     <button class="btn-primary btn-secondary" onclick="backToOptions()">
-                        <span>[<] Voltar aos seletores</span>
+                        <span>[<] Voltar às formas de busca</span>
                     </button>
                 </div>
             </div>
 
-            <!-- STEP 2: Terminal com logs subindo desde o topo em grande quantidade -->
+            <!-- STEP 2: Terminal com 30 segundos -->
             <div id="step-2" class="step-content">
                 <div class="step-header">
                     <div class="step-info-left">
                         <span class="step-number">02</span>
-                        <h2 id="terminal-status-title">Painel de Varredura Sherlock</h2>
+                        <h2 id="terminal-status-title">Painel de Varredura Vigilante</h2>
                     </div>
                     <span class="node-tag" style="color: var(--primary-red); background: rgba(239,68,68,0.12);">LIVE_TRACE</span>
                 </div>
 
                 <div class="terminal-container">
                     <div class="terminal-header-bar">
-                        <span>SHERLOCK_OSINT_KERNEL // GLOBAL_V4.8</span>
+                        <span>VIGILANTE_OSINT_KERNEL // GLOBAL_V4.8</span>
                         <span>SOCKET: SECURE</span>
                     </div>
                     <div class="terminal-logs" id="terminal-logs-box">
@@ -651,28 +754,19 @@
                 </div>
             </div>
 
-            <!-- STEP 3: Resultados em Português com Dossiê Completo Expandido (7 Registros) -->
+            <!-- STEP 3: Resultados com contagem persuasiva e 10 registros -->
             <div id="step-3" class="step-content" style="justify-content: space-between;">
                 <div class="alert-box">
-                    <span class="alert-icon">🚨</span>
+                    <span class="alert-icon">⚠️</span>
                     <div>
-                        <h3 id="found-alert-title">Alvos sensíveis identificados.</h3>
-                        <p>Arquivos confidenciais isolados em sandbox criptografada.</p>
+                        <h3 id="found-alert-title">Varredura concluída. <strong>Foram encontrados [X] registros de contas associadas!</strong></h3>
                     </div>
                 </div>
 
                 <ul class="results-preview" id="results-list-container"></ul>
 
                 <div class="checkout-box">
-                    <div class="price-container">
-                        <span class="old-price">R$ 197,00</span>
-                        <div class="price-row">
-                            <span class="price-label">Acesso Vitalício OSINT</span>
-                            <span class="new-price">R$ 47,90</span>
-                        </div>
-                    </div>
-                    
-                    <button class="btn-primary" onclick="alert('Redirecionando para o gateway de pagamento seguro...')">
+                    <button class="btn-primary" onclick="openModal()">
                         <span>> DESBLOQUEAR DOSSIÊ COMPLETO</span>
                     </button>
                     <p class="guarantee">🛡️ Varredura 100% anônima. Alvo não notificado.</p>
@@ -685,70 +779,95 @@
         </footer>
     </div>
 
+    <!-- Modal Popup para WhatsApp e Código Promocional -->
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>DESBLOQUEAR DOSSIÊ COMPLETO</h3>
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-field">
+                    <label for="whatsapp-input">SEU NÚMERO DE CONTATO (WHATSAPP)</label>
+                    <input type="text" id="whatsapp-input" placeholder="+55 (00) 00000-0000">
+                </div>
+                <div class="modal-field">
+                    <label for="promo-input">CÓDIGO PROMOCIONAL (OPCIONAL)</label>
+                    <input type="text" id="promo-input" placeholder="Digite o código">
+                </div>
+                <button class="btn-primary" onclick="processCheckout()" style="margin-top: 4px;">
+                    <span>> CONTINUAR / LIBERAR RESULTADO</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         let selectedMethodType = '';
         
-        const sherlockPlatforms = [
-            "Fatal Model", "Tinder Brasil", "Bumble Brasil", "Badoo", "Happn",
-            "Inner Circle Brasil", "Sexlog", "Privacy", "ParPerfeito", "Meetic Brasil",
-            "Tinder Global", "Bumble International", "Hinge", "Match.com World", "OkCupid",
-            "PlentyOfFish (POF)", "Ashley Madison", "Feeld", "Coffee Meets Bagel", "Grindr Global",
-            "Her App", "Taimi", "C-Date International", "AdultFriendFinder", "Badoo Global",
-            "Telegram (Global Nodes)", "Instagram (Secundários)", "Snapchat Secure", "Kwai World", "TikTok Global Logs"
+        const platformsList = [
+            "Fatal Model (BR)", "Xvideos Indexer", "Erome DB (Crawlers)", "Telegram Secure Nodes", "Tinder Brasil API", 
+            "Bumble Brasil Logs", "Privacy Storage Node", "Sexlog Gateway", "OnlyFans Secure API", "Badoo Global", 
+            "Happn Localizer", "Inner Circle Brasil", "C-Date International", "Tinder Global", "Bumble International", 
+            "Hinge Vault", "Match.com World", "OkCupid DeepScan", "PlentyOfFish (POF)", "Ashley Madison DB", 
+            "Feeld Secure", "Coffee Meets Bagel", "Grindr Global Node", "Her App Database", "Taimi Vault", 
+            "AdultFriendFinder", "Telegram Channels (Vazados)", "Instagram (Secundários)", "Snapchat Secure Node", "Kwai World Logs", 
+            "TikTok Global Logs", "Discord DM Archive", "X (Twitter) Cached Cache", "Reddit Secret Threads", "Mega.nz Index Vault", 
+            "Google Drive Shared Index", "OneDrive Direct Scans", "WhatsApp Export Gateway", "VKontakte Russian Node", "XNXX Indexer"
         ];
 
-        // 50 frases com gatilho emocional e estilo forense
-        const triggerPhrases = [
-            "Última visita ativa no Privacy registrada há 1 hora atrás.",
-            "Mensagem trocada recentemente no chat do Badoo a 1 dia.",
-            "Conta secundária/fake identificada e vinculada no Instagram.",
-            "Registro de localização de entrada em motel na região (endereço oculto).",
-            "Conteúdo de fotos íntimas detectado e oculto em plataforma adulta.",
-            "Acesso verificado ao perfil do Tinder a menos de 45 minutos.",
-            "Último envio de mídia temporária no Telegram há 2 horas.",
-            "Troca de curtidas e favoritos secretos detectada no Bumble.",
-            "Endereço de IP compartilhado com check-in em aplicativo de relacionamento.",
-            "Histórico de mensagens apagadas recuperado no chat do Happn.",
-            "Registro de transação via cartão de crédito em site de acompanhantes.",
-            "Perfil alternativo com nome falso mapeado no Instagram.",
-            "Visita recorrente a motel local mapeada por geolocalização.",
-            "Assinatura ativa com visualização de conteúdo no Privacy hoje.",
-            "Conversa direta iniciada com áudio trocado no Badoo ontem.",
-            "Alerta de proximidade com outro usuário disparado no Tinder.",
-            "Fotos ocultas e protegidas por senha identificadas na galeria remota.",
-            "Registro de acesso noturno em portal de encontros casuais.",
-            "Conta clonada ou secundária ativa com histórico de 30 dias.",
-            "Interação suspeita com curtidas ocultas no feed do Instagram.",
-            "Varredura de metadados aponta histórico de conversas confidenciais.",
-            "Log de conexão em aplicativo de pegação detectado na última madrugada.",
-            "Registro de entrada em estabelecimento privativo (motel) via GPS do celular.",
-            "Envio de mensagem privada com troca de fotos no Privacy há 3 horas.",
-            "Perfil oculto com o mesmo número de telefone cadastrado no Badoo.",
-            "Conexão simultânea via Wi-Fi identificada em plataforma de relacionamento.",
-            "Alerta vermelho: Mensagens comprometedoras arquivadas em chat secreto.",
-            "Histórico de busca por perfis locais mapeado em app de namoro.",
-            "Registro de recarga de créditos para visualização de conteúdo adulto.",
-            "Conta fantasma com seguidores ocultos descoberta no Instagram.",
-            "Última interação com match correspondido registrada há 10 minutos.",
-            "Registro de IP em site de encontros extraconjugais na região.",
-            "Mídia enviada e apagada instantaneamente recuperada pelo sistema.",
-            "Check-in de geolocalização em motel cruzado com dados do alvo.",
-            "Perfil falso ativo com interações direcionadas para contatos locais.",
-            "Mensagens de texto picantes recuperadas do cache do aplicativo Badoo.",
-            "Assinatura VIP detectada em plataforma de criadores de conteúdo (Privacy).",
-            "Registro de login duplicado utilizando dados de acesso secundários.",
-            "Interações cruzadas com curtidas mútuas em app de encontros.",
-            "Alerta de atividade suspeita em rede social secundária (modo anônimo).",
-            "Registro de chat privado com troca de contatos telefônicos ocultos.",
-            "Histórico de navegação recente direcionado a plataformas de relacionamento.",
-            "Perfil alternativo com fotos mascaradas descoberto no Instagram.",
-            "Registro de presença em motel local cruzado com logs de chamada.",
-            "Mensagens enviadas em horário de ausência justificada (madrugada).",
-            "Conexão via Bluetooth/Proximidade mapeada em local suspeito.",
-            "Conteúdo exclusivo adquirido e desbloqueado via cartão virtual.",
-            "Histórico de exclusão de conversas recuperado parcialmente via API.",
-            "Registro de acesso constante a perfis específicos de mesma região.",
-            "Dossiê consolidado de interações ocultas em aplicativos de encontros."
+        // 50 frases assertivas focadas em aplicativos de relacionamento, conteúdo adulto e perfis fakes
+        const assertiveTriggerPhrases = [
+            "Perfil ativo e correspondente localizado em aplicativo de encontros casuais na região.",
+            "Transação financeira processada e aprovada em plataforma de conteúdo adulto com o e-mail do alvo.",
+            "Criação de perfil secundário/fake detectada em rede social com fotos e dados cruzados.",
+            "Histórico de acesso simultâneo verificado em chat de conversas privadas e anônimas.",
+            "Cadastro de número de telefone associado a perfil ativo em plataforma de relacionamento.",
+            "Assinatura recorrente vinculada a cartão de crédito em site de entretenimento adulto.",
+            "Metadados de geolocalização apontando check-in constante em motel ou ponto de encontro.",
+            "Conta de usuário alternativa identificada com o mesmo padrão de senha e IP residencial.",
+            "Registro de mensagens trocadas e apagadas em aplicativo de mensagens com criptografia.",
+            "Histórico de navegação noturna direcionado a portais de relacionamento extraconjugal.",
+            "Perfil oculto de relacionamento descoberto através de cruzamento de número de telefone.",
+            "Compras de créditos e assinaturas em site de conteúdo adulto localizadas no histórico de faturamento.",
+            "Perfil falso monitorado com interações frequentes voltadas para contas de terceiros.",
+            "Sessão de chat paralela aberta em aplicativo de paquera com notificações ocultas.",
+            "Cadastro validado por SMS em plataforma de encontros com dados idênticos aos do alvo.",
+            "Extrato de consumo digital apontando acesso a vídeos e transmissões de conteúdo adulto.",
+            "Conta em rede social configurada com nome alternativo e lista de amigos oculta.",
+            "Registro de mensagens de texto com tom íntimo interceptadas em servidor de backup.",
+            "Associação de e-mail secundário a aplicativo de paquera e conversas rápidas.",
+            "Transação em ambiente restrito de conteúdo adulto com confirmação de dispositivo móvel.",
+            "Perfil de relacionamento mantido em aplicativo internacional com histórico de conexões ativas.",
+            "Histórico de pagamentos a criadores de conteúdo adulto vinculado a chaves de PIX do alvo.",
+            "Perfil alternativo em rede social criado para interações em páginas de conteúdo privado.",
+            "Registro de chamadas de vídeo e áudio noturnas em aplicativo de encontros casuais.",
+            "Sincronização de contatos apontando o número do alvo salvo em base de app de paquera.",
+            "Consumo frequente de assinaturas mensais em portais de conteúdo adulto exclusivo.",
+            "Conta secreta no Instagram identificada por correspondência de biografia e seguidores em comum.",
+            "Dados de login salvos no navegador vinculados a plataforma de relacionamentos.",
+            "Comprovante de assinatura digital em site de entretenimento adulto localizado no cache.",
+            "Perfil oculto em rede de encontros com mensagens não lidas e status de online recente.",
+            "Correspondência de IP e dispositivo detectada em acesso recente a aplicativo de paquera.",
+            "Movimentação financeira suspeita em site de conteúdo adulto com criptografia de ponta.",
+            "Perfil de fachada em rede social utilizado para visualizar contas restritas de terceiros.",
+            "Registro de atividade em chat de encontros durante horários de ausência informada.",
+            "Vínculo de conta telefônica verificado em base de dados de aplicativo de relacionamentos.",
+            "Fatura de cartão digital com lançamento em plataforma de conteúdo adulto restrito.",
+            "Conta anônima em rede social associada ao número de recuperação do próprio alvo.",
+            "Logs de conexão apontando troca de mensagens privadas em app de encontros rápidos.",
+            "Cadastro em site de paquera com validação de foto em tempo real concluída.",
+            "Histórico de downloads de arquivos de mídia privada associado a site adulto.",
+            "Perfil oculto em aplicativo de encontros localizado com base em filtros de proximidade.",
+            "Pacote de créditos adquirido para envio de mensagens diretas em plataforma de conteúdo adulto.",
+            "Perfil secundário em rede social com interações direcionadas mantido sob sigilo.",
+            "Registro de curtidas e favoritos salvos em perfil de relacionamento de terceiros.",
+            "Conta ativa e validada por e-mail em app de encontros casuais da categoria premium.",
+            "Histórico de cobrança recorrente identificado em fatura de streaming de conteúdo adulto.",
+            "Identificador de usuário alternativo descoberto em varredura profunda de redes sociais.",
+            "Interações cruzadas em chat privado apontando conversas frequentes fora do horário comercial.",
+            "Cadastro em plataforma de encontros com preenchimento completo de gostos e preferências.",
+            "Registro de sessão ativa em site adulto com confirmação de login através do dispositivo principal."
         ];
 
         const configData = {
@@ -793,27 +912,6 @@
                 emoji: '🏷️', 
                 placeholder: 'usuario123',
                 instruction: 'Insira o apelido ou username utilizado para localizar contas em centenas de sites.'
-            },
-            dating_app: { 
-                title: 'Alvo: Apps Relacionamento', 
-                label: 'DATING_QUERY', 
-                emoji: '🔥', 
-                placeholder: 'Telefone ou e-mail',
-                instruction: 'Insira os dados de contato para varrer perfis ativos em aplicativos de namoro.'
-            },
-            dating_site: { 
-                title: 'Alvo: Sites Relacionamento', 
-                label: 'SITE_QUERY', 
-                emoji: '🌐', 
-                placeholder: 'E-mail ou username',
-                instruction: 'Preencha para identificar cadastros confidenciais em portais de relacionamento.'
-            },
-            adult_site: { 
-                title: 'Alvo: Redes Adultas', 
-                label: 'ADULT_QUERY', 
-                emoji: '🔞', 
-                placeholder: 'E-mail ou username',
-                instruction: 'Insira os dados para verificar assinaturas e perfis ocultos em plataformas adultas.'
             }
         };
 
@@ -857,32 +955,26 @@
             progressFill.style.width = '0%';
             progressText.textContent = '0%';
 
-            let foundIndices = [0, 1, 6, 12, 18, 22, 27];
-
             let currentIndex = 0;
-            const totalSteps = sherlockPlatforms.length;
-            const activeTimeMs = 120;
+            const totalSteps = platformsList.length;
+            const activeTimeMs = 700;
 
             function runTerminalStep() {
                 if (currentIndex < totalSteps) {
-                    const platformName = sherlockPlatforms[currentIndex];
-                    const isFound = foundIndices.includes(currentIndex);
-                    const timeSec = (currentIndex * 0.3).toFixed(1);
-                    const timeStr = `[00:0${timeSec}]`;
+                    const platformName = platformsList[currentIndex];
+                    let secElapsed = (currentIndex * 0.75).toFixed(1);
+                    if (secElapsed.length === 3) secElapsed = "0" + secElapsed;
+                    const timeStr = `[00:${secElapsed}]`;
                     
                     loadingText.textContent = `Varrendo: ${platformName}...`;
-                    let currentPercent = Math.round(((currentIndex + 1) / totalSteps) * 60);
+                    let currentPercent = Math.round(((currentIndex + 1) / totalSteps) * 85);
                     progressFill.style.width = `${currentPercent}%`;
                     progressText.textContent = `${currentPercent}%`;
 
                     const logDiv = document.createElement('div');
                     logDiv.className = 'log-line';
-                    if (isFound) {
-                        logDiv.innerHTML = `<span class="log-time">${timeStr}</span><span>[+] ${platformName}: <span class="log-status-alert">MATCH_ENCONTRADO</span></span>`;
-                    } else {
-                        const statusType = Math.random() > 0.3 ? '<span class="log-status-ok">NODE_LIMPO</span>' : '<span style="color:#facc15">VARREDURA_OK</span>';
-                        logDiv.innerHTML = `<span class="log-time">${timeStr}</span><span>[-] ${platformName}: ${statusType}</span>`;
-                    }
+                    const statusType = Math.random() > 0.25 ? '<span class="log-status-ok">VARREDURA_OK</span>' : '<span style="color:#facc15">NODE_INDEXADO</span>';
+                    logDiv.innerHTML = `<span class="log-time">${timeStr}</span><span>[*] ${platformName}: ${statusType}</span>`;
 
                     terminalLogsBox.appendChild(logDiv);
                     terminalLogsBox.scrollTop = terminalLogsBox.scrollHeight;
@@ -890,13 +982,13 @@
                     currentIndex++;
                     setTimeout(runTerminalStep, activeTimeMs);
                 } else {
-                    startMassSherlockPhase();
+                    startMassPhase();
                 }
             }
             runTerminalStep();
         }
 
-        function startMassSherlockPhase() {
+        function startMassPhase() {
             const loadingText = document.getElementById('loading-text');
             const progressFill = document.getElementById('progress-fill');
             const progressText = document.getElementById('progress-text');
@@ -906,18 +998,18 @@
             
             const logDiv = document.createElement('div');
             logDiv.className = 'log-line';
-            logDiv.innerHTML = `<span class="log-time">[00:09]</span><span style="color: #facc15;">[~] Descriptografando metadados cruzados e logs de servidores internacionais...</span>`;
+            logDiv.innerHTML = `<span class="log-time">[00:28]</span><span style="color: #facc15;">[~] Criptografando e isolando registros identificados no servidor...</span>`;
             terminalLogsBox.appendChild(logDiv);
             terminalLogsBox.scrollTop = terminalLogsBox.scrollHeight;
 
             const massDurationMs = 2000;
-            const intervalTimeMs = 80;
+            const intervalTimeMs = 100;
             const totalIncrements = massDurationMs / intervalTimeMs; 
             let currentIncrement = 0;
 
             const massInterval = setInterval(() => {
                 currentIncrement++;
-                let percent = 60 + Math.round((currentIncrement / totalIncrements) * 40);
+                let percent = 85 + Math.round((currentIncrement / totalIncrements) * 15);
                 if (percent > 100) percent = 100;
 
                 progressFill.style.width = `${percent}%`;
@@ -931,7 +1023,7 @@
 
                     const successDiv = document.createElement('div');
                     successDiv.className = 'log-line';
-                    successDiv.innerHTML = `<span class="log-time">[00:12]</span><span style="color: #4ade80;">[✓] Dossiê completo gerado. Exibindo 7 registros confidenciais...</span>`;
+                    successDiv.innerHTML = `<span class="log-time">[00:30]</span><span style="color: #4ade80;">[✓] Dossiê consolidado com sucesso. Registros ocultos sob chave de segurança.</span>`;
                     terminalLogsBox.appendChild(successDiv);
                     terminalLogsBox.scrollTop = terminalLogsBox.scrollHeight;
 
@@ -939,7 +1031,7 @@
                         populateResultsPage();
                         document.getElementById('step-2').classList.remove('active');
                         document.getElementById('step-3').classList.add('active');
-                    }, 500);
+                    }, 600);
                 }
             }, intervalTimeMs);
         }
@@ -947,20 +1039,26 @@
         function populateResultsPage() {
             const resultsListContainer = document.getElementById('results-list-container');
             resultsListContainer.innerHTML = '';
-            document.getElementById('found-alert-title').innerHTML = `Foram encontrados <strong>7 arquivos confidenciais detalhados</strong>.`;
+            
+            // Gerar número randômico entre 3 e 15 para as contas encontradas
+            const randomCount = Math.floor(Math.random() * (15 - 3 + 1)) + 3;
+            document.getElementById('found-alert-title').innerHTML = `Varredura concluída. Foram encontrados <strong>${randomCount} resultados de contas registradas com essa informação!</strong> Vale a pena conferir.`;
 
-            // Seleciona 7 frases aleatórias do vetor triggerPhrases sem repetição
-            let shuffled = [...triggerPhrases].sort(() => 0.5 - Math.random());
-            let selectedPhrases = shuffled.slice(0, 7);
+            // Selecionar exatamente 10 registros exclusivos
+            let shuffled = [...assertiveTriggerPhrases].sort(() => 0.5 - Math.random());
+            let selectedPhrases = shuffled.slice(0, 10);
 
             const sourcesList = [
-                "Fatal Model (BR)", 
-                "Tinder Global (Mundial)", 
-                "Bumble International (Mundial)", 
-                "Ashley Madison (Mundial)", 
-                "Sexlog (BR)",
-                "Privacy (Secure Node)",
-                "Badoo Global API"
+                "Gateway Seguro #01", 
+                "Servidor Internacional #02", 
+                "Sandbox Criptografada #03", 
+                "Node de Rastreio #04", 
+                "Diretório Restrito #05",
+                "Cluster de Dados #06",
+                "API de Varredura #07",
+                "Node Privado #08",
+                "Servidor Remoto #09",
+                "Sandbox Global #10"
             ];
 
             selectedPhrases.forEach((phrase, index) => {
@@ -968,7 +1066,7 @@
                 li.innerHTML = `
                     <div class="result-item-header">
                         <div class="result-info">
-                            <span class="result-type">REGISTRO_ENCONTRADO_#0${index + 1}</span>
+                            <span class="result-type">REGISTRO_CRIPTO_#0${index + 1}</span>
                             <span class="result-source">ORIGEM: ${sourcesList[index]}</span>
                         </div>
                         <span class="locked-badge">BLOQUEADO</span>
@@ -980,6 +1078,34 @@
                 resultsListContainer.appendChild(li);
             });
         }
+
+        function openModal() {
+            document.getElementById('checkout-modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('checkout-modal').classList.remove('active');
+        }
+
+        function processCheckout() {
+            const whatsapp = document.getElementById('whatsapp-input').value.trim();
+            const promo = document.getElementById('promo-input').value.trim();
+
+            if (!whatsapp) {
+                alert('Por favor, informe seu número de WhatsApp.');
+                return;
+            }
+
+            if (promo === 'adminadmin') {
+                alert('Código promocional válido! O envio do dossiê completo foi liberado para o WhatsApp: ' + whatsapp);
+                closeModal();
+            } else {
+                alert('Redirecionando para o gateway de pagamento seguro (Valor: R$ 49,90) para envio do resultado ao WhatsApp: ' + whatsapp);
+                closeModal();
+            }
+        }
     </script>
 </body>
 </html>
+
+```
