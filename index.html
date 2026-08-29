@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Vigilante | Inteligência de Perfis & Varredura Criptografada</title>
     
     <!-- Preconnect para acelerar carregamento de fontes -->
@@ -10,11 +10,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- CSS Crítico Inline para renderização instantânea (elimina tela preta) -->
+    <!-- CSS Crítico Otimizado para Mobile Instantâneo -->
     <style>
         :root {
             --bg-deep: #07090e;
-            --card-bg: rgba(17, 24, 39, 0.75);
+            --card-bg: rgba(15, 23, 42, 0.95);
             --border-color: rgba(255, 255, 255, 0.08);
             --primary-red: #dc2626;
             --text-main: #f9fafb;
@@ -27,13 +27,14 @@
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             background-color: var(--bg-deep);
             color: var(--text-main);
             min-height: 100vh;
-            padding: 32px 16px;
+            padding: 24px 16px;
             position: relative;
             overflow-x: hidden;
             display: block;
@@ -41,17 +42,17 @@
 
         .bg-glow {
             position: absolute;
-            width: 350px;
-            height: 350px;
+            width: 280px;
+            height: 280px;
             border-radius: 50%;
-            filter: blur(120px);
+            filter: blur(80px);
             z-index: 0;
-            opacity: 0.15;
+            opacity: 0.12;
             pointer-events: none;
         }
 
-        .bg-glow-1 { top: -100px; left: -100px; background-color: var(--primary-red); }
-        .bg-glow-2 { bottom: -100px; right: -100px; background-color: #3b82f6; }
+        .bg-glow-1 { top: -80px; left: -80px; background-color: var(--primary-red); }
+        .bg-glow-2 { bottom: -80px; right: -80px; background-color: #3b82f6; }
 
         .wrapper {
             width: 100%;
@@ -63,7 +64,7 @@
 
         .header {
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .brand-container {
@@ -71,39 +72,38 @@
             flex-direction: column;
             align-items: center;
             gap: 4px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .brand-main {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .brand-icon {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             stroke: var(--primary-red);
         }
 
         .brand-name {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 800;
-            letter-spacing: 5px;
+            letter-spacing: 4px;
             color: #fff;
-            text-shadow: 0 0 25px rgba(220, 38, 38, 0.6);
         }
 
         .brand-subtitle {
             color: #f87171;
-            font-size: 11px;
+            font-size: 10.5px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2.5px;
+            letter-spacing: 2px;
         }
 
         .header h1 {
-            font-size: 19px;
+            font-size: 18px;
             color: #ffffff;
             font-weight: 700;
             line-height: 1.35;
@@ -111,64 +111,56 @@
         }
 
         .header h1 span { color: #f87171; }
-        .header p { font-size: 12.5px; color: var(--text-muted); line-height: 1.4; }
+        .header p { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
 
         .card {
             background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
             position: relative;
+            transform: translateZ(0); /* Aceleração de hardware GPU */
         }
 
         .step-content {
             display: none;
-            animation: fadeIn 0.3s ease forwards;
         }
 
         .step-content.active { display: block; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
 
         .step-header {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 12px;
+            padding-bottom: 10px;
         }
 
         .step-number {
-            font-size: 12px;
+            font-size: 11.5px;
             font-weight: 700;
             color: var(--primary-red);
             background: rgba(220, 38, 38, 0.1);
-            padding: 4px 8px;
+            padding: 3px 7px;
             border-radius: 6px;
         }
 
-        .step-header h2 { font-size: 15px; font-weight: 600; color: #e5e7eb; }
+        .step-header h2 { font-size: 14.5px; font-weight: 600; color: #e5e7eb; }
 
         .options-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 16px;
+            gap: 8px;
+            margin-bottom: 14px;
         }
 
         .option-card {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.07);
             border-radius: 12px;
-            padding: 12px 6px;
+            padding: 10px 4px;
             cursor: pointer;
             display: flex;
             flex-direction: column;
@@ -176,22 +168,23 @@
             text-align: center;
             justify-content: center;
             aspect-ratio: 1 / 1;
-            transition: all 0.2s ease;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
-        .option-card:hover {
-            background: rgba(220, 38, 38, 0.07);
-            border-color: rgba(220, 38, 38, 0.4);
-            transform: translateY(-2px);
+        /* Feedback visual imediato ao toque no mobile */
+        .option-card:active {
+            background: rgba(220, 38, 38, 0.15);
+            border-color: rgba(220, 38, 38, 0.5);
+            transform: scale(0.96);
         }
 
         .option-icon {
-            font-size: 20px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
+            font-size: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -199,7 +192,7 @@
         }
 
         .option-info h3 {
-            font-size: 10px;
+            font-size: 9.5px;
             font-weight: 600;
             color: #fff;
             display: -webkit-box;
@@ -208,8 +201,8 @@
             overflow: hidden;
         }
 
-        .input-group { margin-bottom: 16px; }
-        .input-group label { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; font-weight: 500; }
+        .input-group { margin-bottom: 14px; }
+        .input-group label { display: block; font-size: 11.5px; color: var(--text-muted); margin-bottom: 6px; font-weight: 500; }
         
         .input-wrapper {
             position: relative;
@@ -221,20 +214,18 @@
 
         .input-group input {
             width: 100%;
-            padding: 13px 14px 13px 40px;
-            background-color: rgba(31, 41, 55, 0.6);
+            padding: 12px 14px 12px 38px;
+            background-color: rgba(31, 41, 55, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             color: #fff;
-            font-size: 14px;
-            transition: all 0.2s ease;
+            font-size: 16px; /* Evita zoom automático no iOS */
+            outline: none;
         }
 
         .input-group input:focus {
-            outline: none;
             border-color: var(--primary-red);
-            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
-            background-color: rgba(31, 41, 55, 0.9);
+            background-color: rgba(31, 41, 55, 1);
         }
 
         .btn-primary {
@@ -244,45 +235,44 @@
             color: #ffffff;
             border: none;
             border-radius: 10px;
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
-            margin-top: 8px;
-            transition: transform 0.1s;
+            margin-top: 6px;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
-        .btn-primary:active { transform: scale(0.98); }
+        .btn-primary:active { transform: scale(0.98); opacity: 0.9; }
 
         .btn-secondary {
             background: transparent;
             border: 1px solid var(--border-color);
             color: var(--text-muted);
-            margin-bottom: 12px;
-            box-shadow: none;
+            margin-bottom: 8px;
         }
 
-        .btn-secondary:hover { background: rgba(255, 255, 255, 0.05); color: #fff; }
+        .btn-secondary:hover { color: #fff; }
 
-        .loader-container { text-align: center; padding: 16px 0; }
+        .loader-container { text-align: center; padding: 12px 0; }
 
         .radar-loader {
             position: relative;
-            width: 50px;
-            height: 50px;
-            margin: 0 auto 16px auto;
+            width: 44px;
+            height: 44px;
+            margin: 0 auto 14px auto;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
         .spinner {
-            width: 42px;
-            height: 42px;
+            width: 38px;
+            height: 38px;
             border: 3px solid rgba(255, 255, 255, 0.1);
             border-top: 3px solid var(--primary-red);
             border-radius: 50%;
@@ -291,16 +281,16 @@
 
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        .loader-container h3 { font-size: 14px; font-weight: 600; color: #f3f4f6; margin-bottom: 6px; min-height: 20px; }
-        .subtext { font-size: 11.5px; color: var(--text-muted); }
+        .loader-container h3 { font-size: 13.5px; font-weight: 600; color: #f3f4f6; margin-bottom: 6px; min-height: 18px; }
+        .subtext { font-size: 11px; color: var(--text-muted); }
 
         .progress-bar-wrapper {
             width: 100%;
             background: rgba(31, 41, 55, 0.8);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            height: 10px;
-            margin: 16px 0 10px 0;
+            border-radius: 6px;
+            height: 8px;
+            margin: 14px 0 8px 0;
             overflow: hidden;
         }
 
@@ -308,73 +298,73 @@
             height: 100%;
             width: 0%;
             background: linear-gradient(90deg, #dc2626, #ef4444);
-            border-radius: 8px;
+            border-radius: 6px;
             transition: width 0.08s linear;
         }
 
-        .progress-percentage { font-size: 13px; font-weight: 700; color: #fca5a5; margin-bottom: 14px; }
+        .progress-percentage { font-size: 12px; font-weight: 700; color: #fca5a5; margin-bottom: 12px; }
 
         .checklist-container {
-            max-height: 180px;
+            max-height: 160px;
             overflow-y: auto;
-            background: rgba(15, 23, 42, 0.5);
+            background: rgba(15, 23, 42, 0.6);
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 8px;
-            margin-bottom: 16px;
+            border-radius: 8px;
+            padding: 6px;
+            margin-bottom: 14px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
         }
 
         .checklist-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 8px 10px;
+            padding: 7px 9px;
             background: rgba(31, 41, 55, 0.4);
-            border-radius: 8px;
-            font-size: 12px;
+            border-radius: 6px;
+            font-size: 11.5px;
             color: var(--text-muted);
         }
 
         .checklist-item.scanning { color: #fff; background: rgba(31, 41, 55, 0.8); border-left: 3px solid var(--primary-red); }
-        .checklist-item.clean { color: #34d399; background: rgba(52, 211, 153, 0.08); border: 1px solid rgba(52, 211, 153, 0.25); }
-        .checklist-item.found { color: #fca5a5; background: rgba(220, 38, 38, 0.12); border: 1px solid rgba(220, 38, 38, 0.3); }
+        .checklist-item.clean { color: #34d399; background: rgba(52, 211, 153, 0.08); }
+        .checklist-item.found { color: #fca5a5; background: rgba(220, 38, 38, 0.12); }
 
-        .checklist-status { font-size: 11px; font-weight: 600; }
+        .checklist-status { font-size: 10.5px; font-weight: 600; }
 
         .alert-box {
             background: rgba(220, 38, 38, 0.08);
             border: 1px solid rgba(220, 38, 38, 0.25);
-            padding: 14px;
-            border-radius: 10px;
+            padding: 12px;
+            border-radius: 8px;
             display: flex;
-            gap: 12px;
-            margin-bottom: 16px;
+            gap: 10px;
+            margin-bottom: 14px;
             align-items: flex-start;
         }
 
-        .alert-icon { font-size: 16px; margin-top: 2px; }
-        .alert-box h3 { font-size: 12.5px; color: #fca5a5; line-height: 1.4; font-weight: 600; }
-        .alert-box p { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+        .alert-icon { font-size: 15px; }
+        .alert-box h3 { font-size: 12px; color: #fca5a5; line-height: 1.35; font-weight: 600; }
+        .alert-box p { font-size: 10.5px; color: var(--text-muted); margin-top: 2px; }
 
         .results-preview {
             list-style: none;
-            margin-bottom: 20px;
-            max-height: 220px;
+            margin-bottom: 16px;
+            max-height: 200px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
         .results-preview li {
             background: rgba(31, 41, 55, 0.4);
             border: 1px solid var(--border-color);
-            padding: 12px 14px;
-            border-radius: 10px;
-            font-size: 12px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 11.5px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -382,41 +372,38 @@
 
         .result-info { display: flex; flex-direction: column; gap: 2px; }
         .result-type { font-weight: 600; color: #e5e7eb; }
-        .result-source { font-size: 10px; color: #9ca3af; }
+        .result-source { font-size: 9.5px; color: #9ca3af; }
 
         .locked-badge {
             background-color: rgba(220, 38, 38, 0.15);
             color: #fca5a5;
-            padding: 6px 10px;
-            border-radius: 6px;
-            font-size: 11px;
+            padding: 5px 8px;
+            border-radius: 5px;
+            font-size: 10.5px;
             font-weight: 600;
             border: 1px solid rgba(220, 38, 38, 0.3);
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
         }
 
-        .checkout-box { border-top: 1px solid var(--border-color); padding-top: 16px; }
+        .checkout-box { border-top: 1px solid var(--border-color); padding-top: 14px; }
 
         .price-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(15, 23, 42, 0.5);
-            padding: 10px 14px;
-            border-radius: 10px;
-            margin-bottom: 14px;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
             border: 1px solid var(--border-color);
         }
 
-        .old-price { font-size: 12px; color: #6b7280; text-decoration: line-through; }
+        .old-price { font-size: 11.5px; color: #6b7280; text-decoration: line-through; }
         .price-row { text-align: right; }
-        .price-label { display: block; font-size: 10px; color: var(--text-muted); }
-        .new-price { font-size: 18px; font-weight: 700; color: var(--accent-green); }
+        .price-label { display: block; font-size: 9.5px; color: var(--text-muted); }
+        .new-price { font-size: 17px; font-weight: 700; color: var(--accent-green); }
 
-        .guarantee { text-align: center; font-size: 10.5px; color: var(--text-muted); margin-top: 12px; line-height: 1.4; }
-        .footer { text-align: center; margin-top: 24px; font-size: 11px; color: #4b5563; }
+        .guarantee { text-align: center; font-size: 10px; color: var(--text-muted); margin-top: 10px; line-height: 1.35; }
+        .footer { text-align: center; margin-top: 20px; font-size: 10.5px; color: #4b5563; }
     </style>
 </head>
 <body>
@@ -445,39 +432,39 @@
                 </div>
                 
                 <div class="options-grid">
-                    <div class="option-card" onclick="selectMethod('phone')">
+                    <div class="option-card" ontouchend="selectMethod('phone'); event.preventDefault();" onclick="selectMethod('phone')">
                         <span class="option-icon">📱</span>
                         <div class="option-info"><h3>Telefone</h3></div>
                     </div>
-                    <div class="option-card" onclick="selectMethod('email')">
+                    <div class="option-card" ontouchend="selectMethod('email'); event.preventDefault();" onclick="selectMethod('email')">
                         <span class="option-icon">📧</span>
                         <div class="option-info"><h3>E-mail</h3></div>
                     </div>
-                    <div class="option-card" onclick="selectMethod('name')">
+                    <div class="option-card" ontouchend="selectMethod('name'); event.preventDefault();" onclick="selectMethod('name')">
                         <span class="option-icon">👤</span>
                         <div class="option-info"><h3>Nome</h3></div>
                     </div>
-                    <div class="option-card" onclick="selectMethod('whatsapp')">
+                    <div class="option-card" ontouchend="selectMethod('whatsapp'); event.preventDefault();" onclick="selectMethod('whatsapp')">
                         <span class="option-icon">💬</span>
                         <div class="option-info"><h3>WhatsApp</h3></div>
                     </div>
-                    <div class="option-card" onclick="selectMethod('instagram')">
+                    <div class="option-card" ontouchend="selectMethod('instagram'); event.preventDefault();" onclick="selectMethod('instagram')">
                         <span class="option-icon">📸</span>
                         <div class="option-info"><h3>Instagram</h3></div>
                     </div>
-                    <div class="option-card" onclick="selectMethod('username')">
+                    <div class="option-card" ontouchend="selectMethod('username'); event.preventDefault();" onclick="selectMethod('username')">
                         <span class="option-icon">🏷️</span>
                         <div class="option-info"><h3>Username</h3></div>
                     </div>
-                    <div class="option-card" onclick="selectMethod('dating_app')">
+                    <div class="option-card" ontouchend="selectMethod('dating_app'); event.preventDefault();" onclick="selectMethod('dating_app')">
                         <span class="option-icon">🔥</span>
-                        <div class="option-info"><h3>App de Relacionamento</h3></div>
+                        <div class="option-info"><h3>App Relacionamento</h3></div>
                     </div>
-                    <div class="option-card" onclick="selectMethod('dating_site')">
+                    <div class="option-card" ontouchend="selectMethod('dating_site'); event.preventDefault();" onclick="selectMethod('dating_site')">
                         <span class="option-icon">🌐</span>
-                        <div class="option-info"><h3>Site de Relacionamento</h3></div>
+                        <div class="option-info"><h3>Site Relacionamento</h3></div>
                     </div>
-                    <div class="option-card" onclick="selectMethod('adult_site')">
+                    <div class="option-card" ontouchend="selectMethod('adult_site'); event.preventDefault();" onclick="selectMethod('adult_site')">
                         <span class="option-icon">🔞</span>
                         <div class="option-info"><h3>Plataforma Adulta</h3></div>
                     </div>
@@ -520,7 +507,7 @@
                     </div>
                     <div class="progress-percentage" id="progress-text">0%</div>
 
-                    <p class="subtext" style="margin-bottom: 10px;" id="scan-subtext">Varrendo bases e plataformas brasileiras:</p>
+                    <p class="subtext" style="margin-bottom: 8px;" id="scan-subtext">Varrendo bases e plataformas brasileiras:</p>
                     
                     <div class="checklist-container" id="checklist-box"></div>
                 </div>
@@ -531,7 +518,7 @@
                     <span class="alert-icon">🔒</span>
                     <div>
                         <h3 id="found-alert-title">Foram detectados registros ativos vinculados a este contato.</h3>
-                        <p>Os dados identificados encontram-se criptografados. Desbloqueie o dossiê completo para visualizar as plataformas e detalhes.</p>
+                        <p>Os dados identificados encontram-se criptografados. Desbloqueie o dossiê completo para visualizar os detalhes.</p>
                     </div>
                 </div>
 
@@ -641,8 +628,8 @@
                 checklistContainer.appendChild(item);
             });
 
-            const activeTimeMs = 1000;
-            const transitionTimeMs = 300;
+            const activeTimeMs = 800;
+            const transitionTimeMs = 200;
             const totalSteps = mainPlatformsList.length;
             let currentIndex = 0;
 
@@ -699,7 +686,7 @@
             checklistContainer.appendChild(massItem);
             checklistContainer.scrollTop = massItem.offsetTop - checklistContainer.offsetTop;
 
-            const massDurationMs = 25000;
+            const massDurationMs = 20000;
             const intervalTimeMs = 100;
             const totalIncrements = massDurationMs / intervalTimeMs; 
             let currentIncrement = 0;
@@ -724,7 +711,7 @@
                         populateResultsPage();
                         document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
                         document.getElementById('step-3').classList.add('active');
-                    }, 1000);
+                    }, 800);
                 }
             }, intervalTimeMs);
         }
